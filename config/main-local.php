@@ -3,7 +3,7 @@
 $config = [
     'components' => [
         'request' => [
-            'cookieValidationKey' => 'O2-a2TawoCRIfYdMR2W8LZta1vAHuaWH',
+            'cookieValidationKey' => 'QRh_5Osc2gx7roJ7u84nFjyHstZLnw1P',
         ],
         'session' => [
             'class' => 'yii\web\DbSession',
