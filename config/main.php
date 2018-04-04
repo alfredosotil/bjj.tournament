@@ -52,6 +52,9 @@ $config = [
             'on afterLogin' => function ($event) {
                 $event->identity->updateLastLogin();
             },
+            'on afterSignup' => function ($event) {
+                $event->identity->updateUuid();
+            },
         ],
         'cart' => [
             'class' => 'yii2mod\cart\Cart',

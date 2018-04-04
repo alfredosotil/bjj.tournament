@@ -69,6 +69,7 @@ class User extends BaseUserModel {
     public function rules() {
 
         return array_replace_recursive(parent::rules(), [
+//            [['uuid'], 'default', 'value' => $this->gene],
             [['status', 'created_at', 'updated_at', 'last_login', 'is_active', 'total_points'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -82,9 +83,9 @@ class User extends BaseUserModel {
     /**
      * @inheritdoc
      */
-//    public static function tableName() {
-//        return 'user';
-//    }
+    public static function tableName() {
+        return 'user';
+    }
 
     /**
      *
@@ -155,6 +156,13 @@ class User extends BaseUserModel {
                 ],
             ],
         ];
+    }
+
+    /**
+     * Update uuid
+     */
+    public function updateUuid() {
+        $this->updateAttributes(['uuid' => $this->getDb()->createCommand("REPLACE(UUID(),'-','')")->queryScalar()]);
     }
 
     /**

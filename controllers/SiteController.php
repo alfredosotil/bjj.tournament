@@ -83,6 +83,7 @@ class SiteController extends Controller
             ],
             'signup' => [
                 'class' => 'yii2mod\user\actions\SignupAction',
+                'modelClass' => \app\models\forms\SignupForm::class
             ],
             'request-password-reset' => [
                 'class' => 'yii2mod\user\actions\RequestPasswordResetAction',
