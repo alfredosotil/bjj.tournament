@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models\base;
 
 use Yii;
@@ -19,7 +18,7 @@ use yii2mod\user\models\UserModel as BaseUserModel;
  * @property string $password_reset_token
  * @property string $email
  * @property integer $status
- * @property integer $created_at
+ * @property string $created_at
  * @property integer $updated_at
  * @property integer $last_login
  * @property string $uuid
@@ -34,15 +33,17 @@ use yii2mod\user\models\UserModel as BaseUserModel;
  *
  * @property \app\models\Competitors[] $competitors
  */
-class User extends BaseUserModel {
+class User extends BaseUserModel
+{
 
     use \mootensai\relation\RelationTrait;
 
     private $_rt_softdelete;
     private $_rt_softrestore;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct()
+    {
+//        parent::__construct();
         $this->_rt_softdelete = [
             'deleted_by' => \Yii::$app->user->id,
             'deleted_at' => date('Y-m-d H:i:s'),
@@ -57,7 +58,8 @@ class User extends BaseUserModel {
      * This function helps \mootensai\relation\RelationTrait runs faster
      * @return array relation names of this model
      */
-    public function relationNames() {
+    public function relationNames()
+    {
         return [
             'competitors'
         ];
@@ -66,24 +68,36 @@ class User extends BaseUserModel {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
 
-        return array_replace_recursive(parent::rules(), [
-//            [['uuid'], 'default', 'value' => $this->gene],
-            [['status', 'created_at', 'updated_at', 'last_login', 'is_active', 'total_points'], 'integer'],
+        return [
+            [['username', 'email'], 'required'],
+            ['email', 'unique', 'message' => Yii::t('yii2mod.user', 'This email address has already been taken.')],
+            ['username', 'unique', 'message' => Yii::t('yii2mod.user', 'This username has already been taken.')],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['plainPassword', 'string', 'min' => 6],
+            ['plainPassword', 'required', 'on' => 'create'],
+            ['status', 'default', 'value' => \yii2mod\user\models\enums\UserStatus::ACTIVE],
+            ['status', 'in', 'range' => \yii2mod\user\models\enums\UserStatus::getConstantsByName()],
+            [['status', 'last_login', 'is_active', 'total_points'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['uuid', 'name', 'last_name', 'phone_number'], 'string', 'max' => 45],
+            [['created_at', 'updated_at', ], 'string'],
             [['password_reset_token'], 'unique'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
-        ]);
+//            [['lock'], 'default', 'value' => '0'],
+//            [['lock'], 'mootensai\components\OptimisticLockValidator']
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'user';
     }
 
@@ -94,14 +108,16 @@ class User extends BaseUserModel {
      * return string name of field are used to stored optimistic lock
      *
      */
-    public function optimisticLock() {
+    public function optimisticLock()
+    {
         return 'lock';
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('app', 'Username'),
@@ -124,7 +140,8 @@ class User extends BaseUserModel {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompetitors() {
+    public function getCompetitors()
+    {
         return $this->hasMany(\app\models\Competitors::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
@@ -132,7 +149,8 @@ class User extends BaseUserModel {
      * @inheritdoc
      * @return array mixed
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
@@ -140,11 +158,11 @@ class User extends BaseUserModel {
                 'updatedAtAttribute' => 'updated_at',
                 'value' => new \yii\db\Expression('NOW()'),
             ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
+//            'blameable' => [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'created_by',
+//                'updatedByAttribute' => 'updated_by',
+//            ],
             'uuid' => [
                 'class' => UUIDBehavior::className(),
                 'column' => 'uuid',
@@ -156,13 +174,6 @@ class User extends BaseUserModel {
                 ],
             ],
         ];
-    }
-
-    /**
-     * Update uuid
-     */
-    public function updateUuid() {
-        $this->updateAttributes(['uuid' => $this->getDb()->createCommand("REPLACE(UUID(),'-','')")->queryScalar()]);
     }
 
     /**
@@ -191,9 +202,9 @@ class User extends BaseUserModel {
      * @inheritdoc
      * @return \app\models\UserQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         $query = new \app\models\UserQuery(get_called_class());
         return $query->where([]);
     }
-
 }
