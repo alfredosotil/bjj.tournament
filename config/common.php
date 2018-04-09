@@ -23,6 +23,7 @@ $config = [
         'assetsAutoCompress' =>
         [
             'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+            'enabled' => false,
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

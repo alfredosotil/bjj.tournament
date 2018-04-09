@@ -49,7 +49,8 @@
         "kartik-v/yii2-mpdf": "dev-master",
         "kartik-v/yii2-tree-manager": "dev-master",
         "yii2mod/yii2-gii-extended": "^1.0",
-        "yii2tech/ar-softdelete": "^1.0"
+        "yii2tech/ar-softdelete": "^1.0",
+        "tebazil/db-seeder": "^0.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
