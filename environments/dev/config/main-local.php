@@ -1,5 +1,4 @@
 <?php
-
 $config = [
     'components' => [
         'request' => [
@@ -37,6 +36,9 @@ if (!YII_ENV_TEST) {
             ],
             'crud' => [
                 'class' => 'yii2mod\gii\crud\Generator',
+            ],
+            'fixture' => [
+                'class' => 'elisdn\gii\fixture\Generator',
             ],
         ],
     ];

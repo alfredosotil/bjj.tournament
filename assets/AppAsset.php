@@ -5,7 +5,6 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license   http://www.yiiframework.com/license/
  */
-
 namespace app\assets;
 
 use yii\web\AssetBundle;
@@ -17,14 +16,17 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+
     /**
      * @var string
      */
     public $basePath = '@webroot';
+
     /**
      * @var string
      */
     public $baseUrl = '@web';
+
     /**
      * @var array
      */
@@ -37,6 +39,8 @@ class AppAsset extends AssetBundle
         'css/menuzord-skins/menuzord-boxed.css',
         'css/style-main.css',
         'css/colors/theme-skin-sky-blue.css',
+//        'css/colors/theme-skin-lemon.css',
+//        'css/colors/theme-skin-sky-blue-light.css',
         'css/preloader.css',
         'css/custom-bootstrap-margin-padding.css',
         'css/responsive.css',
@@ -45,6 +49,7 @@ class AppAsset extends AssetBundle
         'js/revolution-slider/css/layers.css',
         'js/revolution-slider/css/navigation.css',
     ];
+
     /**
      * @var array
      */
@@ -67,6 +72,7 @@ class AppAsset extends AssetBundle
         'js/revolution-slider/js/extensions/revolution.extension.slideanims.min.js',
         'js/revolution-slider/js/extensions/revolution.extension.video.min.js',
     ];
+
     /**
      * @var array
      */
@@ -74,4 +80,5 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
 //        'yii\bootstrap\BootstrapAsset',
     ];
+
 }

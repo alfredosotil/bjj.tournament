@@ -1,5 +1,4 @@
 <?php
-
 $config = [
     'id' => 'console',
     'controllerNamespace' => 'app\commands',
@@ -17,16 +16,21 @@ $config = [
                 '@app/migrations',
             ],
         ],
-        'fixture' => [
+        'fixture-base' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'app\tests\fixtures',
+        ],
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'templatePath' => '@tests/templates/fixtures',
+            'fixtureDataPath' => '@tests/_data',
         ],
     ],
     'components' => [
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
-            'scriptUrl' => 'http://meraki.local',
-            'baseUrl' => 'http://meraki.local', // Setup your domain
+            'scriptUrl' => 'http://bjj.tournament.local',
+            'baseUrl' => 'http://bjj.tournament.local', // Setup your domain
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

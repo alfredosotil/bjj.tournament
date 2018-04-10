@@ -25,7 +25,7 @@ AppAsset::register($this);
         <title><?php echo implode(' | ', array_filter([Html::encode($this->title), Yii::$app->name])); ?></title>
         <?php $this->head() ?>
     </head>
-    <body class="dark">
+    <body class="">
         <?php $this->beginBody() ?>
         <?php echo BootstrapNotify::widget(); ?>
         <div id="wrapper">

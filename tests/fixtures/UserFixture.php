@@ -14,5 +14,5 @@ class UserFixture extends ActiveFixture
     /**
      * @var string
      */
-    public $modelClass = 'app\models\UserModel';
+    public $modelClass = 'app\models\User';
 }
