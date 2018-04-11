@@ -16,6 +16,8 @@ class m180401_033530_create_table_events extends \yii\db\Migration
             'uuid' => $this->string(45),
             'name' => $this->string(45),
             'address' => $this->string(100),
+            'start_at' => $this->timestamp(),
+            'end_at' => $this->timestamp(),
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
             'created_by' => $this->integer(11),
