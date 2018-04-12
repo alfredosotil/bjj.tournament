@@ -21,4 +21,9 @@ return [
     'status' => 1,
     'created_at' => $faker->unixTime(),
     'updated_at' => $faker->unixTime(),
+    'uuid' => $faker->uuid,
+    'name' => $faker->name,
+    'last_name' => $faker->lastName,
+    'birthday' => strtotime('-' . $index++ . ' year'),
+    'total_points' => 0,
 ];

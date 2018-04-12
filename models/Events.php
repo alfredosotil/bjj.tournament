@@ -17,11 +17,10 @@ class Events extends BaseEvents
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id'], 'required'],
-            [['id', 'created_by', 'updated_by', 'is_active'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_by', 'updated_by', 'is_active'], 'integer'],
             [['uuid', 'name'], 'string', 'max' => 45],
-            [['address'], 'string', 'max' => 100]
+            [['address'], 'string', 'max' => 100],
+            [['start_at', 'end_at', 'created_at', 'updated_at'], 'string', 'max' => 255]
         ]);
     }
 	
@@ -35,6 +34,8 @@ class Events extends BaseEvents
             'uuid' => Yii::t('app', 'Uuid'),
             'name' => Yii::t('app', 'Name'),
             'address' => Yii::t('app', 'Address'),
+            'start_at' => Yii::t('app', 'Start At'),
+            'end_at' => Yii::t('app', 'End At'),
             'is_active' => Yii::t('app', 'Is Active'),
         ];
     }

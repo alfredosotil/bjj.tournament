@@ -17,8 +17,7 @@ class Categories extends BaseCategories
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id'], 'required'],
-            [['id', 'code'], 'integer'],
+            [['code'], 'integer'],
             [['name', 'description'], 'string', 'max' => 45]
         ]);
     }

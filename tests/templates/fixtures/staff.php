@@ -16,6 +16,7 @@ return [
     'uuid' => $faker->uuid,
     'name' => $faker->name,
     'last_name' => $faker->lastName,
+    'email' => $faker->email,
     'phone_number' => $faker->phoneNumber,
     'total_matches' => 0,
     'type' => $faker->randomElement(['mesas', 'arbitros','operaciones'])

@@ -5,7 +5,7 @@ namespace app\models\base;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use mootensai\behaviors\UUIDBehavior;
+use app\components\CustomUUIDBehavior as UUIDBehavior;
 
 /**
  * This is the base model class for table "staff".
@@ -57,8 +57,7 @@ class Staff extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['id'], 'required'],
-            [['id', 'total_matches'], 'integer'],
+            [['total_matches'], 'integer'],
             [['uuid', 'name', 'last_name', 'email', 'phone_number', 'type'], 'string', 'max' => 45]
         ];
     }

@@ -17,9 +17,8 @@ class Teams extends BaseTeams
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id'], 'required'],
-            [['id', 'created_by', 'updated_by', 'is_active'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
+            [['created_by', 'updated_by', 'is_active'], 'integer'],
             [['uuid', 'name', 'profesor_name', 'email', 'phone_number'], 'string', 'max' => 45]
         ]);
     }

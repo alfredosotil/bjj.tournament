@@ -12,11 +12,10 @@ class m180401_033736_create_table_categories extends \yii\db\Migration
         }
         
         $this->createTable('categories', [
-            'id' => $this->integer(11)->notNull(),
+            'id' => $this->primaryKey(),
             'name' => $this->string(45),
             'description' => $this->string(45),
             'code' => $this->integer(11),
-            'PRIMARY KEY ([[id]])',
             ], $tableOptions);
                 
     }

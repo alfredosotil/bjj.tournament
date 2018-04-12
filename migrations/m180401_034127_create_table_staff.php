@@ -12,7 +12,7 @@ class m180401_034127_create_table_staff extends \yii\db\Migration
         }
         
         $this->createTable('staff', [
-            'id' => $this->integer(11)->notNull(),
+            'id' => $this->primaryKey(),
             'uuid' => $this->string(45),
             'name' => $this->string(45),
             'last_name' => $this->string(45),
@@ -20,7 +20,6 @@ class m180401_034127_create_table_staff extends \yii\db\Migration
             'phone_number' => $this->string(45),
             'total_matches' => $this->integer(11),
             'type' => $this->string(45),
-            'PRIMARY KEY ([[id]])',
             ], $tableOptions);
                 
     }

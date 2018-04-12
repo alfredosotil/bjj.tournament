@@ -13,11 +13,11 @@ $faker = Faker\Factory::create();
  */
 return [
     'uuid' => $faker->uuid,
-    'name' => $faker->sentence(4, true),
+    'name' => $faker->sentence(2, true),
     'address' => $faker->address,
-    'start_at' => $faker->unixTime('+' . $index++ . ' week'),
-    'end_at' => $faker->unixTime('+' . $index++ . ' week'),
-    'created_at' => $faker->unixTime(),
-    'updated_at' => $faker->unixTime(),
+    'start_at' => strtotime('+' . $index++ . ' week'),
+    'end_at' => strtotime('+' . $index++ . ' week'),
+    'created_at' => time(),
+    'updated_at' => time(),
     'is_active' => 1
 ];

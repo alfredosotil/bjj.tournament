@@ -4,7 +4,7 @@ namespace app\models\base;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use mootensai\behaviors\UUIDBehavior;
+use app\components\CustomUUIDBehavior as UUIDBehavior;
 use yii2tech\ar\softdelete\SoftDeleteBehavior;
 use yii2mod\user\models\UserModel as BaseUserModel;
 
@@ -26,7 +26,6 @@ use yii2mod\user\models\UserModel as BaseUserModel;
  * @property string $last_name
  * @property string $phone_number
  * @property string $birthday
- * @property integer $is_active
  * @property integer $total_points
  * @property string $deleted_at
  * @property string $deleted_by
@@ -82,14 +81,12 @@ class User extends BaseUserModel
             ['plainPassword', 'required', 'on' => 'create'],
             ['status', 'default', 'value' => \yii2mod\user\models\enums\UserStatus::ACTIVE],
             ['status', 'in', 'range' => \yii2mod\user\models\enums\UserStatus::getConstantsByName()],
-            [['status', 'last_login', 'is_active', 'total_points'], 'integer'],
+            [['status', 'last_login', 'total_points'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['uuid', 'name', 'last_name', 'phone_number'], 'string', 'max' => 45],
-            [['created_at', 'updated_at', ], 'string'],
+            [['created_at', 'updated_at', 'birthday'], 'string'],
             [['password_reset_token'], 'unique'],
-//            [['lock'], 'default', 'value' => '0'],
-//            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
 
@@ -132,7 +129,6 @@ class User extends BaseUserModel
             'last_name' => Yii::t('app', 'Last Name'),
             'phone_number' => Yii::t('app', 'Phone Number'),
             'birthday' => Yii::t('app', 'Birthday'),
-            'is_active' => Yii::t('app', 'Is Active'),
             'total_points' => Yii::t('app', 'Total Points'),
         ];
     }
@@ -175,7 +171,6 @@ class User extends BaseUserModel
             ],
         ];
     }
-
     /**
      * The following code shows how to apply a default condition for all queries:
      *

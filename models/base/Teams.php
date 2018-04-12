@@ -5,7 +5,7 @@ namespace app\models\base;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use mootensai\behaviors\UUIDBehavior;
+use app\components\CustomUUIDBehavior as UUIDBehavior;
 
 /**
  * This is the base model class for table "teams".
@@ -60,9 +60,8 @@ class Teams extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['id'], 'required'],
-            [['id', 'created_by', 'updated_by', 'is_active'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
+            [['created_by', 'updated_by', 'is_active'], 'integer'],
             [['uuid', 'name', 'profesor_name', 'email', 'phone_number'], 'string', 'max' => 45]
         ];
     }

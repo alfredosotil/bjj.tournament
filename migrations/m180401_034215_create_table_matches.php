@@ -12,7 +12,7 @@ class m180401_034215_create_table_matches extends \yii\db\Migration
         }
         
         $this->createTable('matches', [
-            'id' => $this->integer(11)->notNull(),
+            'id' => $this->primaryKey(),
             'uuid' => $this->string(45),
             'points_1' => $this->double(),
             'points_2' => $this->double(),
@@ -20,7 +20,6 @@ class m180401_034215_create_table_matches extends \yii\db\Migration
             'competitors_2_id' => $this->integer(11)->notNull(),
             'competitors_winner_id' => $this->integer(11)->notNull(),
             'staff_id' => $this->integer(11)->notNull(),
-            'PRIMARY KEY ([[id]], [[competitors_1_id]], [[competitors_2_id]], [[competitors_winner_id]], [[staff_id]])',
             'FOREIGN KEY ([[competitors_winner_id]]) REFERENCES competitors ([[id]]) ON DELETE CASCADE ON UPDATE CASCADE',
             'FOREIGN KEY ([[staff_id]]) REFERENCES staff ([[id]]) ON DELETE CASCADE ON UPDATE CASCADE',
             ], $tableOptions);

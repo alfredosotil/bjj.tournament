@@ -5,7 +5,7 @@ namespace app\models\base;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use mootensai\behaviors\UUIDBehavior;
+use app\components\CustomUUIDBehavior as UUIDBehavior;
 
 /**
  * This is the base model class for table "categories".
@@ -55,8 +55,7 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['id'], 'required'],
-            [['id', 'code'], 'integer'],
+            [['code'], 'integer'],
             [['name', 'description'], 'string', 'max' => 45]
         ];
     }

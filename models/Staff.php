@@ -17,8 +17,7 @@ class Staff extends BaseStaff
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id'], 'required'],
-            [['id', 'total_matches'], 'integer'],
+            [['total_matches'], 'integer'],
             [['uuid', 'name', 'last_name', 'email', 'phone_number', 'type'], 'string', 'max' => 45]
         ]);
     }

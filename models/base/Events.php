@@ -5,7 +5,7 @@ namespace app\models\base;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
-use mootensai\behaviors\UUIDBehavior;
+use app\components\CustomUUIDBehavior as UUIDBehavior;
 
 /**
  * This is the base model class for table "events".
@@ -14,6 +14,8 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $uuid
  * @property string $name
  * @property string $address
+ * @property string $start_at
+ * @property string $end_at
  * @property string $created_at
  * @property string $updated_at
  * @property integer $created_by
@@ -60,11 +62,10 @@ class Events extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['id'], 'required'],
-            [['id', 'created_by', 'updated_by', 'is_active'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_by', 'updated_by', 'is_active'], 'integer'],
             [['uuid', 'name'], 'string', 'max' => 45],
-            [['address'], 'string', 'max' => 100]
+            [['address'], 'string', 'max' => 100],
+            [['start_at', 'end_at', 'created_at', 'updated_at'], 'string', 'max' => 255]
         ];
     }
 
@@ -86,6 +87,8 @@ class Events extends \yii\db\ActiveRecord
             'uuid' => Yii::t('app', 'Uuid'),
             'name' => Yii::t('app', 'Name'),
             'address' => Yii::t('app', 'Address'),
+            'start_at' => Yii::t('app', 'Start At'),
+            'end_at' => Yii::t('app', 'End At'),
             'is_active' => Yii::t('app', 'Is Active'),
         ];
     }

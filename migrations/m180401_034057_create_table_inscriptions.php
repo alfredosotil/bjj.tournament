@@ -12,12 +12,11 @@ class m180401_034057_create_table_inscriptions extends \yii\db\Migration
         }
         
         $this->createTable('inscriptions', [
-            'id' => $this->integer(11)->notNull(),
+            'id' => $this->primaryKey(),
             'uuid' => $this->string(45),
             'is_paid' => $this->smallInteger(1),
             'amount' => $this->double(),
             'competitors_id' => $this->integer(11)->notNull(),
-            'PRIMARY KEY ([[id]], [[competitors_id]])',
             'FOREIGN KEY ([[competitors_id]]) REFERENCES competitors ([[id]]) ON DELETE CASCADE ON UPDATE CASCADE',
             ], $tableOptions);
                 
