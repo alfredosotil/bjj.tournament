@@ -1,4 +1,5 @@
 <?php
+
 $config = [
     'id' => 'console',
     'controllerNamespace' => 'app\commands',
@@ -24,6 +25,9 @@ $config = [
             'class' => 'yii\faker\FixtureController',
             'templatePath' => '@tests/templates/fixtures',
             'fixtureDataPath' => '@tests/_data',
+        ],
+        'migration' => [
+            'class' => 'bizley\migration\controllers\MigrationController',
         ],
     ],
     'components' => [

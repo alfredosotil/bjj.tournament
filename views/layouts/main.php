@@ -1,12 +1,16 @@
 <?php
 
 use app\assets\AppAsset;
-use yii\bootstrap\Nav;
+use app\components\CustomNav as Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Menu;
 use yii2mod\notify\BootstrapNotify;
+use app\widgets\ViewAlertWidget;
+use app\widgets\LoginFormWidget;
+use app\widgets\PasswordResetRequestFormWidget;
+use app\widgets\SignupFormWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -27,7 +31,10 @@ AppAsset::register($this);
     </head>
     <body class="">
         <?php $this->beginBody() ?>
-        <?php echo BootstrapNotify::widget(); ?>
+        <?= (Yii::$app->user->isGuest ? LoginFormWidget::widget([]) : ''); ?>
+        <?= (Yii::$app->user->isGuest ? PasswordResetRequestFormWidget::widget([]) : ''); ?>
+        <?= (Yii::$app->user->isGuest ? SignupFormWidget::widget([]) : ''); ?>
+        <?= ViewAlertWidget::widget([]); ?>
         <div id="wrapper">
             <!-- preloader -->
             <div id="preloader">
@@ -44,13 +51,75 @@ AppAsset::register($this);
                         <div class="row">
                             <div class="col-md-4">
                                 <nav>
-                                    <ul class="list-inline sm-text-center text-left flip mt-5">
-                                        <!--<li> <a class="text-white" href="#">FAQ</a> </li>-->
-                                        <!--<li class="text-white">|</li>-->
-                                        <!--<li> <a class="text-white" href="#">Help Desk</a> </li>-->
-                                        <!--<li class="text-white">|</li>-->
+<!--                                    <ul class="list-inline sm-text-center text-left flip mt-5">
+                                        <li> 
+                                            <a class="text-white" href="#">Iniciar</a> 
+                                            <?php if (Yii::$app->user->isGuest): ?>
+                                                <a id="signin-form-button" class="text-white" href="#" data-toggle="modal" data-target="#login-form"><i class="icon-user"></i>Iniciar</a>
+                                            <?php else: ?>
+                                                <a class="text-white" href="/site/logout" data-confirm="Are you sure you want to sign out?" data-method="post">Salir</a>
+                                            <?php endif; ?>
+                                        </li>
+                                        <li class="text-white">|</li>
+                                                                                <li> <a class="text-white" href="#"></a> </li>
+                                                                                <li class="text-white">|</li>
                                         <li> <a class="text-white" href="#">Soporte</a> </li>
-                                    </ul>
+                                    </ul>-->
+                                    <?php
+                                    $items = [
+                                        [
+                                            'label' => '<i class="icon-user"></i>' . Yii::t('yii2mod.user', 'Iniciar Sesión'),
+                                            'url' => '#',
+                                            'linkOptions' => [
+                                                'id' => 'signin-form-button',
+                                                'class' => 'text-white',
+                                                'data' => [
+                                                    'toggle' => 'modal',
+                                                    'target' => '#login-form',
+                                                ]
+                                            ],
+                                            'visible' => Yii::$app->user->isGuest
+                                        ],
+                                        [
+                                            'label' => Yii::t('app', 'Opciones'),
+                                            'linkOptions' => ['class' => 'c-link'],
+                                            'options' => ['class' => 'text-white'],
+                                            'dropDownOptions' =>
+                                            [
+                                                'class' => 'c-menu-type-classic c-pull-left',
+                                                'style' => 'min-width: auto;'
+                                            ],
+                                            'items' => [
+                                                [
+                                                    'label' => Yii::t('yii2mod.user', 'Mi cuenta'),
+                                                    'url' => ['site/account'],
+                                                ],
+                                                [
+                                                    'label' => Yii::t('yii2mod.user', 'Administración'),
+                                                    'url' => ['admin/'],
+                                                    'visible' => Yii::$app->getUser()->can('admin'),
+                                                ],
+                                            ],
+                                            'visible' => !Yii::$app->user->isGuest
+                                        ],
+                                        [
+                                            'label' => Yii::t('yii2mod.user', 'Salir'),
+                                            'url' => ['site/logout'],
+                                            'linkOptions' => [
+                                                'class' => 'text-white',
+                                                'data' => [
+                                                    'confirm' => Yii::t('yii2mod.user', 'Estas seguro que quieres salir?'),
+                                                    'method' => 'post',
+                                                ]],
+                                            'visible' => !Yii::$app->user->isGuest
+                                        ],
+                                    ];
+                                    echo Nav::widget([
+                                        'options' => ['class' => 'list-inline sm-text-center text-left flip mt-5'],
+                                        'items' => $items,
+                                        'encodeLabels' => false,
+                                    ]);
+                                    ?>
                                 </nav>
                             </div>
                             <div class="col-md-6">

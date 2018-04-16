@@ -50,7 +50,11 @@
         "kartik-v/yii2-tree-manager": "dev-master",
         "yii2mod/yii2-gii-extended": "^1.0",
         "yii2tech/ar-softdelete": "^1.0",
-        "yiisoft/yii2-faker": "^2.0"
+        "yiisoft/yii2-faker": "^2.0",
+        "bizley/migration": "~2.3.0",
+        "yii2mod/yii2-sweet-alert": "*",
+        "mongosoft/yii2-upload-behavior": "*",
+        "zxbodya/yii2-gallery-manager": "*@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

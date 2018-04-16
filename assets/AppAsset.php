@@ -32,6 +32,7 @@ class AppAsset extends AssetBundle
      */
     public $css = [
         'css/site.css',
+        'css/components.css',
         'css/bootstrap.min.css',
         'css/jquery-ui.min.css',
         'css/animate.css',
